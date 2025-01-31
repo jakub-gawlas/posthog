@@ -65,6 +65,7 @@ class ConnectionInfo(NamedTuple):
     port: int | None
 
     def make_pool(self, client_settings: Mapping[str, str] | None = None) -> ChPool:
+        print("debug: make_pool: self.address", self.address)
         return _make_ch_pool(host=self.address, port=self.port, settings=client_settings)
 
 

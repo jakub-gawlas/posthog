@@ -167,7 +167,7 @@ services:
     capture:
         image: ghcr.io/posthog/posthog/capture:master
         build:
-            context: rust/
+            context: posthog/rust/
             args:
                 BIN: capture
         restart: on-failure
@@ -181,7 +181,7 @@ services:
     replay-capture:
         image: ghcr.io/posthog/posthog/capture:master
         build:
-            context: rust/
+            context: posthog/rust/
             args:
                 BIN: capture
         restart: on-failure
@@ -195,7 +195,7 @@ services:
     property-defs-rs:
         image: ghcr.io/posthog/posthog/property-defs-rs:master
         build:
-            context: rust/
+            context: posthog/rust/
             args:
                 BIN: property-defs-rs
         restart: on-failure
@@ -209,7 +209,7 @@ services:
     feature-flags:
         image: ghcr.io/posthog/posthog/feature-flags:master
         build:
-            context: rust/
+            context: posthog/rust/
             args:
                 BIN: feature-flags
         restart: on-failure
@@ -250,14 +250,14 @@ services:
             && python manage.py migrate_clickhouse
             && python manage.py run_async_migrations
             "
-        restart: 'no'
+        restart: on-failure
         deploy:
             replicas: 0
 
     asyncmigrationscheck:
         <<: *worker
         command: python manage.py run_async_migrations --check
-        restart: 'no'
+        restart: on-failure
         deploy:
             replicas: 0
         environment:
@@ -329,7 +329,7 @@ services:
     cyclotron-fetch:
         image: ghcr.io/posthog/posthog/cyclotron-fetch:master
         build:
-            context: rust/
+            context: posthog/rust/
             args:
                 BIN: cyclotron-fetch
         restart: on-failure
@@ -351,7 +351,7 @@ services:
     cyclotron-janitor:
         image: ghcr.io/posthog/posthog/cyclotron-janitor:master
         build:
-            context: rust/
+            context: posthog/rust/
             args:
                 BIN: cyclotron-janitor
         restart: on-failure

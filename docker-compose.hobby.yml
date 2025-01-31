@@ -17,6 +17,7 @@ services:
         image: ${DOCKER_REGISTRY_PREFIX:-}postgres:12-alpine
         volumes:
             - postgres-data:/var/lib/postgresql/data
+            - ./posthog/docker/postgres-init-scripts:/docker-entrypoint-initdb.d
 
     redis:
         extends:
@@ -93,6 +94,9 @@ services:
         command: /compose/start
         volumes:
             - ./compose:/compose
+            - ./posthog/posthog/management/commands/migrate_clickhouse.py:/code/posthog/management/commands/migrate_clickhouse.py
+            - ./posthog/posthog/clickhouse/client/connection.py:/code/posthog/clickhouse/client/connection.py
+            - ./posthog/posthog/clickhouse/cluster.py:/code/posthog/clickhouse/cluster.py
         image: $REGISTRY_URL:$POSTHOG_APP_TAG
         environment:
             SENTRY_DSN: $SENTRY_DSN

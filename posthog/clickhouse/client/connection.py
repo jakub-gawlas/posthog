@@ -146,6 +146,7 @@ def default_client(host=settings.CLICKHOUSE_HOST):
     Return a bare bones client for use in places where we are only interested in general ClickHouse state
     DO NOT USE THIS FOR QUERYING DATA
     """
+    print("debug: default_client: host:", host)
     return SyncClient(
         host=host,
         # We set "system" here as we don't necessarily have a "default" database,

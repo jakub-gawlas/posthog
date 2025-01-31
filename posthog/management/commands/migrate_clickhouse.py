@@ -92,6 +92,11 @@ class Command(BaseCommand):
                 )
             print("Migrations done")
         else:
+            print("debug: START MIGRATION")
+            print("debug: CLICKHOUSE_HOST", host)
+            print("debug: CLICKHOUSE_DATABASE", CLICKHOUSE_DATABASE)
+            print("debug: CLICKHOUSE_USER", CLICKHOUSE_USER)
+            print("debug: CLICKHOUSE_HTTP_URL", CLICKHOUSE_HTTP_URL)
             database.migrate(MIGRATIONS_PACKAGE_NAME, options["upto"], replicated=True)
             print("✅ Migration successful")
 
