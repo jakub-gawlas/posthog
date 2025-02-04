@@ -94,8 +94,8 @@ services:
         command: /compose/start
         volumes:
             - ./compose:/compose
-            - ./posthog/posthog/management/commands/migrate_clickhouse.py:/code/posthog/management/commands/migrate_clickhouse.py
-            - ./posthog/posthog/clickhouse/client/connection.py:/code/posthog/clickhouse/client/connection.py
+            # - ./posthog/posthog/management/commands/migrate_clickhouse.py:/code/posthog/management/commands/migrate_clickhouse.py
+            # - ./posthog/posthog/clickhouse/client/connection.py:/code/posthog/clickhouse/client/connection.py
             - ./posthog/posthog/clickhouse/cluster.py:/code/posthog/clickhouse/cluster.py
         image: $REGISTRY_URL:$POSTHOG_APP_TAG
         environment:
